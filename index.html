@@ -27,6 +27,7 @@
                 left: 5%;
                 color: blue;
                 width: 40%;
+                height: 10%;
             }
 
             .red-side {
@@ -35,11 +36,12 @@
                 right: 5%;
                 color: red;
                 width: 40%;
+                height: 10%;
             }
 
             .pickbox {
                 position: relative;
-                height: 100px;
+                height: 100%;
                 width: 100%;
                 background-color:rgba(255, 255, 255, .4);
                 display: flex;
@@ -47,9 +49,12 @@
 
             .championimagediv{
                 height:100%;
+                width: 20%;
+
             }
             .championstatsdiv{
                 height:100%;
+                width: 90%;
             }
 
             .championcolorimg{
@@ -70,34 +75,37 @@
             }
 
             .blue_championimage{
-                height: 100px;
-                width: 100px;
+                height: 100%;
+                width: 100%;
             }
 
             .red_champion_name{
                 height: 5%;
+                width: 80%;
                 color:white;
                 text-align: left;
             }
             .red_champion_type{
                 height: 5%;
+                width: 80%;
                 color:white;
                 text-align: right;
+
             }
             .red_championimage{
-                height: 100px;
-                width: 100px;
-                right: 0px;
+                height: 100%;
+                width: 100%;
             }
 
             .championList{
                 position: absolute;
                 top: 20%;
                 left: 35%;
-                margin-top: -50px;
-                margin-left: -50px;
-                width: 500px;
-                height: 500px;
+                /*margin-top: -50px;*/
+                /*margin-left: -50px;*/
+                /*margin-right: -50px;*/
+                width: 50%;
+                height: 50%;
                 z-index: 10;
                 overflow: scroll;
                 backdrop-filter: blur(8px);
@@ -113,20 +121,20 @@
             .champIcon{
                 float: left;
                 width: 17%;
-                padding: 5px;
+                padding: 1%;
                 filter: grayscale(0%);
             }
 
             .champIconGray{
                 float: left;
                 width: 17%;
-                padding: 5px;
+                padding: 1%;
                 filter: grayscale(100%);
                 pointer-events: none;
             }
             .colorBar{
                 top: 5%;
-                height:80%;
+                height:85%;
                 width:100%;
                 background-color: #C7D9D9; 
             }
@@ -282,7 +290,7 @@
                 <input type="text" placeholder="Search..." id='championSearch' onkeyup="searchChampion()">
             </div>
             <div id = "predictions" class="predictions" display="none"> 
-                <button type="button" onclick="create_svg('B1','Aatrox')">Click Me!</button>
+                <!-- <button type="button" onclick="create_svg('B1','Aatrox')">Click Me!</button> -->
             </div>
         </div>
     </body>
