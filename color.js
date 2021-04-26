@@ -2225,6 +2225,9 @@ function create_svg(position, championName){
 
 	var dataCleaned = prepping_data(position, championName);
 
+	var champBox = d3.select("#"+position.toUpperCase() + "-Box");
+	champBox.attr("data-champName", championName);
+
 	var svg = d3.select("#"+position.toUpperCase() + "Color");
 	var height = svg.style("height").slice(0,-2);
 
@@ -2245,7 +2248,7 @@ function create_svg(position, championName){
 	    .attr("height", function(d){return height;})
 	    .attr("width", function(d){return d[0];})  
 	    .attr("transform", function (d, i){var translate = [d[1],0];  return "translate("+ translate + ")"; })
-	    .attr("id", function(d){return d[2]})
+	    .attr("data-attribute", function(d){return d[2]})
 	    .attr("fill", function(d,i){return colours[i]});
 	    // .on("mouseover", function(d){tooltip.text(d.target.id); return tooltip.style("visibility", "visible");})
 	    // .on("mousemove", function(){return tooltip.style("top", 10+"px").style("left",10+"px");})
