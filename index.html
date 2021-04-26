@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Start file">
+        <title>Pick banning analysis</title>
+        <script src="d3/d3.min.js"></script>
+        <script src="jquery-3.6.0.min.js"></script>
+        <script src="champion.js"></script>
+        <script src="color.js"></script>
+        <style>
+            .container {
+                position: relative;
+                text-align: center;
+                color: white;
+            }
+
+            .title-center {
+                position: absolute;
+                top: 2%;
+                left: 35%;
+            }
+
+            .blue-side {
+                position: absolute;
+                top: 5%;
+                left: 5%;
+                color: blue;
+                width: 40%;
+            }
+
+            .red-side {
+                position: absolute;
+                top: 5%;
+                right: 5%;
+                color: red;
+                width: 40%;
+            }
+
+            .pickbox {
+                position: relative;
+                height: 100px;
+                width: 100%;
+                background-color:rgba(255, 255, 255, .4);
+                display: flex;
+            }
+
+            .championimagediv{
+                height:100%;
+            }
+            .championstatsdiv{
+                height:100%;
+            }
+
+            .championcolorimg{
+                width: 100%;
+                height: 100%;
+            }
+
+            .blue_champion_name{
+                height: 5%;
+                color:white;
+                text-align: left;
+            }
+
+            .blue_champion_type{
+                height: 5%;
+                color:white;
+                text-align: right;
+            }
+
+            .blue_championimage{
+                height: 100px;
+                width: 100px;
+            }
+
+            .red_champion_name{
+                height: 5%;
+                color:white;
+                text-align: left;
+            }
+            .red_champion_type{
+                height: 5%;
+                color:white;
+                text-align: right;
+            }
+            .red_championimage{
+                height: 100px;
+                width: 100px;
+                right: 0px;
+            }
+
+            .championList{
+                position: absolute;
+                top: 20%;
+                left: 35%;
+                margin-top: -50px;
+                margin-left: -50px;
+                width: 500px;
+                height: 500px;
+                z-index: 10;
+                overflow: scroll;
+                backdrop-filter: blur(8px);
+                display: flex;
+            }​
+
+            .champRow{
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .champIcon{
+                float: left;
+                width: 17%;
+                padding: 5px;
+                filter: grayscale(0%);
+            }
+
+            .champIconGray{
+                float: left;
+                width: 17%;
+                padding: 5px;
+                filter: grayscale(100%);
+                pointer-events: none;
+            }
+            .colorBar{
+                top: 5%;
+                height:80%;
+                width:100%;
+                background-color: #C7D9D9; 
+            }
+
+            .predictions {
+              /*position: absolute;*/
+              top: 75%;
+              color: white;
+              width: 100%;
+              background-color:rgba(255, 255, 255, .4);
+            }
+
+        </style>
+    </head>
+    <body bgcolor="black"; onload="startHTML()">
+        <div id = "background" class="container">
+        <img src='images/Rift.png' style="width:100%;height:100%;opacity:0.3" >
+
+             <div class = "title-center">League of Legends Pick Bans Analysis</div>
+             <div class = "blue-side"> 
+                <text style="color:blue;font-size:300%;" id="bluesidetext" >Blue Side</text> 
+                <div id='B1-Box' class="pickbox"> 
+                    <div id='B1-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="blue_championimage" align="left" id="B1Icon" onclick="getChampionOverlay('B1')">
+                    </div>
+                    <div id='B1-champstats-div' class='championstatsdiv'>
+                        <span class="blue_champion_name" text-align="left" id="B1_champion_name"></span>
+                        <span class="blue_champion_type" text-align="left" id="B1_champion_type"></span>
+                        <svg id="B1Color" class="colorBar"></svg>
+                    </div>
+                </div>
+                <br>
+                <div id='B2-Box' class="pickbox"> 
+                    <div id='B2-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="blue_championimage" align="left" id="B2Icon" onclick="getChampionOverlay('B2')">
+                    </div>
+                    <div id='B2-champstats-div' class='championstatsdiv'>
+                        <span class="blue_champion_name" text-align="left" id="B2_champion_name"></span>
+                        <span class="blue_champion_type" text-align="left" id="B2_champion_type"></span>
+                        <svg id="B2Color" class="colorBar"></svg>
+
+                    </div>
+                </div>
+                <br>
+
+                <div id='B3-Box' class="pickbox"> 
+                    <div id='B3-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="blue_championimage" align="left" id="B3Icon" onclick="getChampionOverlay('B3')">
+                    </div>
+                    <div id='B3-champstats-div' class='championstatsdiv'>
+
+                        <span class="blue_champion_name" text-align="left" id="B3_champion_name"></span>
+                        <span class="blue_champion_type" text-align="left" id="B3_champion_type"></span>
+                        <svg id="B3Color" class="colorBar"></svg>
+
+                    </div>
+                </div>
+                <br>
+
+                <div id='B4-Box' class="pickbox"> 
+                    <div id='B4-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="blue_championimage" align="left" id="B4Icon" onclick="getChampionOverlay('B4')">
+                    </div>
+                    <div id='B4-champstats-div' class='championstatsdiv'>
+                        <span class="blue_champion_name" text-align="left" id="B4_champion_name"></span>
+                        <span class="blue_champion_type" text-align="left" id="B4_champion_type"></span>
+                        <svg id="B4Color" class="colorBar"></svg>
+                    </div>
+                </div>
+                <br>
+
+                <div id='B5-Box' class="pickbox"> 
+                    <div id='B5-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="blue_championimage" align="left" id="B5Icon" onclick="getChampionOverlay('B5')">
+                    </div>
+                    <div id='B5-champstats-div' class='championstatsdiv'>
+                        <span class="blue_champion_name" text-align="left" id="B5_champion_name"></span>
+                        <span class="blue_champion_type" text-align="left" id="B5_champion_type"></span>
+                        <svg id="B5Color" class="colorBar"></svg>
+                    </div>
+                    <!-- <svg id="B5Color" class="colorpiechart"></svg> -->
+                </div>
+             </div>
+             <div id="redsidetext" class = "red-side"> 
+                <text style="color:red;font-size:300%;" id="redsidetext">Red Side</text>
+               <div id='R1-Box' class="pickbox">
+                    <div id='R1-champstats-div' class='championstatsdiv'>
+                        <span class="red_champion_name" text-align="left" id="R1_champion_name"></span>
+                        <span class="red_champion_type" text-align="left" id="R1_champion_type"></span>
+                        <svg id="R1Color" class="colorBar"></svg>
+
+                    </div>
+                    <div id='R1-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R1Icon" onclick="getChampionOverlay('R1')">
+                    </div>
+                </div>
+                <br>
+                <div id='R2-Box' class="pickbox">    
+                    <div id='R2-champstats-div' class='championstatsdiv'>
+                        <span class="red_champion_name" text-align="left" id="R2_champion_name"></span>
+                        <span class="red_champion_type" text-align="left" id="R2_champion_type"></span> 
+                        <svg id="R2Color" class="colorBar"></svg>
+
+                    </div>
+                    <div id='R2-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R2Icon" onclick="getChampionOverlay('R2')">
+                    </div>
+                    <!-- <svg id="B2Color" class="colorpiechart"></svg> -->
+                </div>
+                <br>
+
+                <div id='R3-Box' class="pickbox"> 
+                    <div id='R3-champstats-div' class='championstatsdiv'>
+                        <span class="red_champion_name" text-align="left" id="R3_champion_name"></span>
+                        <span class="red_champion_type" text-align="left" id="R3_champion_type"></span>
+                        <svg id="R3Color" class="colorBar"></svg>
+
+                    </div>
+                    <div id='R3-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R3Icon" onclick="getChampionOverlay('R3')">
+                    </div>
+                    <!-- <svg id="B3Color" class="colorpiechart"></svg> -->
+                </div>
+                <br>
+
+                <div id='R4-Box' class="pickbox"> 
+                    <div id='R4-champstats-div' class='championstatsdiv'>
+                        <span class="red_champion_name" text-align="left" id="R4_champion_name"></span>
+                        <span class="red_champion_type" text-align="left" id="R4_champion_type"></span>
+                        <svg id="R4Color" class="colorBar"></svg>
+
+                    </div>
+                    <div id='R4-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R4Icon" onclick="getChampionOverlay('R4')">
+                    </div>
+                    <!-- <svg id="B4Color" class="colorpiechart"></svg> -->
+                </div>
+                <br>
+
+                <div id='R5-Box' class="pickbox"> 
+                    <div id='R5-champstats-div' class='championstatsdiv'>
+                        <span class="red_champion_name" text-align="left" id="R5_champion_name"></span>
+                        <span class="red_champion_type" text-align="left" id="R5_champion_type"></span>
+                        <svg id="R5Color" class="colorBar"></svg>
+
+                    </div>
+                    <div id='R5-image-div' class='championimagediv'>                     
+                        <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R5Icon" onclick="getChampionOverlay('R5')">
+                    </div>
+                </div>
+            </div>
+            <div id='championList' class="championList" hidden style="display: none;">
+                <input type="text" placeholder="Search..." id='championSearch' onkeyup="searchChampion()">
+            </div>
+            <div id = "predictions" class="predictions" display="none"> 
+                <button type="button" onclick="create_svg('B1','Aatrox')">Click Me!</button>
+            </div>
+        </div>
+    </body>
+    <script src="app.js"></script>
+
+</html>
