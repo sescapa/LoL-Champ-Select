@@ -2180,60 +2180,77 @@ const cumulativeSum = (sum => value => sum += value)(0);
 var colours = ["#6363FF", "#6373FF", "#63A3FF", "#63E3FF", "#63FFFB", "#63FFCB",
                "#63FF9B", "#63FF6B", "#7BFF63", "#BBFF63", "#DBFF63", "#FBFF63", 
                "#FFD363", "#FFB363", "#FF8363", "#FF7363", "#FF6364"];
-function create_svg(position, championName){
-	// var jsonData = JSON.parse('data/champion_color_inventory.json');
+
+function prepping_data(position, championName){
+	var scalingBar = 0.6;
 	var champData = JSON_file[championName];
-	console.log(champData);
 	var svg = d3.select("#"+position.toUpperCase() + "Color");
-	var width = svg.node().getBBox()['width'];
-	var height = svg.node().getBBox()['height'];
+	var width = svg.style("width").slice(0,-2)*scalingBar;
 
-	var yScale = d3.scaleLinear().domain([0,100]).range([0, 200]);
+	if (position.toUpperCase()[0] === 'B'){
+		var placeTracker = 0;
+	}
+	else{
+		var placeTracker = svg.style("width").slice(0,-2);
+	}
 
-	var graph = svg.append("g").attr("transform", "translate(" + width + "," + height + ")");;
+	var height = svg.style("height").slice(0,-2);
 
+	var yScale = d3.scaleLinear().domain([0,100]).range([0, width]);
 	var dataset = Object.values(champData);
 	var dataString = Object.keys(champData);
 	var dataClean = dataset.map(yScale);
 	var dataCleaned = [];
-	var placeTracker = 0;
 	for(i=0; i<dataset.length;i++){
 		var newArray = [];
-		if(i===0){
-			newArray.push(dataClean[i]);
-			newArray.push(0);
-			newArray.push(dataString[i]);
-		}
-		else{
+		if (position.toUpperCase()[0] === 'B'){
 			newArray.push(dataClean[i]);
 			newArray.push(placeTracker);
 			newArray.push(dataString[i]);
+			placeTracker += dataClean[i];
 		}
-		placeTracker += dataClean[i];
+		else{
+			placeTracker -=dataClean[i];
+			newArray.push(dataClean[i]);
+			newArray.push(placeTracker);
+			newArray.push(dataString[i]);		
+		}
 		dataCleaned.push(newArray);
-		}
-	console.log(dataCleaned);
-	var tooltip = d3.select("body")
-				    .append("div")
-				    .style("position", "absolute")
-				    .style("z-index", "10")
-				    .style("visibility", "hidden")
-				    .style("background", "#FFF")
-				    .text("Simple tooltip");
+	}
+	return dataCleaned
+}
 
-	var barChart = svg.selectAll("rect")  
-	    .data(dataCleaned)  
-	    .enter()  
+function create_svg(position, championName){
+	// var jsonData = JSON.parse('data/champion_color_inventory.json');
+
+	var dataCleaned = prepping_data(position, championName);
+
+	var svg = d3.select("#"+position.toUpperCase() + "Color");
+	var height = svg.style("height").slice(0,-2);
+
+	// var tooltip = d3.select("body")
+	// 			    .append("div")
+	// 			    .style("position", "absolute")
+	// 			    .style("z-index", "10")
+	// 			    .style("visibility", "hidden")
+	// 			    .style("background", "#FFF")
+	// 			    .text("Simple tooltip");
+	svg.selectAll("rect").remove();
+	var barChart = svg.selectAll("rect").exit().remove();
+
+	barChart.data(dataCleaned).enter()
 	    .append("rect")  
 	    .attr("x", 0)
 	    .attr("y", function(d){return 0;})  
-	    .attr("height", function(d){return 90;})
+	    .attr("height", function(d){return height;})
 	    .attr("width", function(d){return d[0];})  
 	    .attr("transform", function (d, i){var translate = [d[1],0];  return "translate("+ translate + ")"; })
 	    .attr("id", function(d){return d[2]})
-	    .attr("fill", function(d,i){return colours[i]})
-	    .on("mouseover", function(d){tooltip.text(d.target.id); return tooltip.style("visibility", "visible");})
-	    .on("mousemove", function(){return tooltip.style("top", 10+"px").style("left",10+"px");})
-      	.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+	    .attr("fill", function(d,i){return colours[i]});
+	    // .on("mouseover", function(d){tooltip.text(d.target.id); return tooltip.style("visibility", "visible");})
+	    // .on("mousemove", function(){return tooltip.style("top", 10+"px").style("left",10+"px");})
+     //  	.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+    barChart.exit().remove();
 
 };
