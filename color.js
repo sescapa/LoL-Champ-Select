@@ -2231,15 +2231,16 @@ function create_svg(position, championName){
 	var svg = d3.select("#"+position.toUpperCase() + "Color");
 	var height = svg.style("height").slice(0,-2);
 
-	// var tooltip = d3.select("body")
-	// 			    .append("div")
-	// 			    .style("position", "absolute")
-	// 			    .style("z-index", "10")
-	// 			    .style("visibility", "hidden")
-	// 			    .style("background", "#FFF")
-	// 			    .text("Simple tooltip");
 	svg.selectAll("rect").remove();
 	var barChart = svg.selectAll("rect").exit().remove();
+
+	var tooltip = d3.select("body")
+			    .append("div")
+			    .style("position", "absolute")
+			    .style("z-index", "0")
+			    .style("visibility", "hidden")
+			    .style("background", "#FFF")
+			    .text("Simple tooltip");
 
 	barChart.data(dataCleaned).enter()
 	    .append("rect")  
@@ -2247,12 +2248,17 @@ function create_svg(position, championName){
 	    .attr("y", function(d){return 0;})  
 	    .attr("height", function(d){return height;})
 	    .attr("width", function(d){return d[0];})  
-	    .attr("transform", function (d, i){var translate = [d[1],0];  return "translate("+ translate + ")"; })
+	    .attr("transform", function (d, i){var translate = [d[1],0];  
+	    									return "translate("+ translate + ")"; })
 	    .attr("data-attribute", function(d){return d[2]})
-	    .attr("fill", function(d,i){return colours[i]});
-	    // .on("mouseover", function(d){tooltip.text(d.target.id); return tooltip.style("visibility", "visible");})
-	    // .on("mousemove", function(){return tooltip.style("top", 10+"px").style("left",10+"px");})
-     //  	.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+	    .attr("fill", function(d,i){return colours[i]})
+	    .on("mouseover", function(d){
+	    							return tooltip.style("visibility", "visible");})
+	    .on("mousemove", function(d){
+	    							tooltip.text(d.target.getAttribute("data-attribute")); 
+	    							var x = d.clientX, y = d.clientY; 
+	    							return tooltip.style('top', y-20 + 'px').style('left', x+'px');})
+      	.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
     barChart.exit().remove();
 
