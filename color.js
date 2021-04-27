@@ -2182,7 +2182,7 @@ var colours = ["#6363FF", "#6373FF", "#63A3FF", "#63E3FF", "#63FFFB", "#63FFCB",
                "#FFD363", "#FFB363", "#FF8363", "#FF7363", "#FF6364"];
 
 function prepping_data(position, championName){
-	var scalingBar = 0.6;
+	var scalingBar = 1;
 	var champData = JSON_file[championName];
 	var svg = d3.select("#"+position.toUpperCase() + "Color");
 	var width = svg.style("width").slice(0,-2)*scalingBar;

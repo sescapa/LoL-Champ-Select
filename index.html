@@ -54,7 +54,12 @@
             }
             .championstatsdiv{
                 height:100%;
-                width: 90%;
+                width: 60%;
+            }
+
+            .championadditional{
+                height: 100%;
+                width: 20%;
             }
 
             .championcolorimg{
@@ -165,6 +170,7 @@
                         <span class="blue_champion_type" text-align="left" id="B1_champion_type"></span>
                         <svg id="B1Color" class="colorBar"></svg>
                     </div>
+                    <div id='B1-additional' class='championadditional'></div>
                 </div>
                 <br>
                 <div id='B2-Box' class="pickbox"> 
@@ -175,8 +181,9 @@
                         <span class="blue_champion_name" text-align="left" id="B2_champion_name"></span>
                         <span class="blue_champion_type" text-align="left" id="B2_champion_type"></span>
                         <svg id="B2Color" class="colorBar"></svg>
-
                     </div>
+                    <div id='B2-additional' class='championadditional'></div>
+
                 </div>
                 <br>
 
@@ -185,12 +192,12 @@
                         <input type="image" src="images/question_mark.jpeg" class="blue_championimage" align="left" id="B3Icon" onclick="getChampionOverlay('B3')">
                     </div>
                     <div id='B3-champstats-div' class='championstatsdiv'>
-
                         <span class="blue_champion_name" text-align="left" id="B3_champion_name"></span>
                         <span class="blue_champion_type" text-align="left" id="B3_champion_type"></span>
                         <svg id="B3Color" class="colorBar"></svg>
-
                     </div>
+                    <div id='B3-additional' class='championadditional'></div>
+
                 </div>
                 <br>
 
@@ -203,6 +210,8 @@
                         <span class="blue_champion_type" text-align="left" id="B4_champion_type"></span>
                         <svg id="B4Color" class="colorBar"></svg>
                     </div>
+                    <div id='B4-additional' class='championadditional'></div>
+
                 </div>
                 <br>
 
@@ -215,12 +224,14 @@
                         <span class="blue_champion_type" text-align="left" id="B5_champion_type"></span>
                         <svg id="B5Color" class="colorBar"></svg>
                     </div>
-                    <!-- <svg id="B5Color" class="colorpiechart"></svg> -->
+                    <div id='B5-additional' class='championadditional'></div>
                 </div>
              </div>
              <div id="redsidetext" class = "red-side"> 
                 <text style="color:red;font-size:300%;" id="redsidetext">Red Side</text>
-               <div id='R1-Box' class="pickbox">
+                <div id='R1-Box' class="pickbox">
+                    <div id='R1-additional' class='championadditional'></div>
+
                     <div id='R1-champstats-div' class='championstatsdiv'>
                         <span class="red_champion_name" text-align="left" id="R1_champion_name"></span>
                         <span class="red_champion_type" text-align="left" id="R1_champion_type"></span>
@@ -232,7 +243,9 @@
                     </div>
                 </div>
                 <br>
-                <div id='R2-Box' class="pickbox">    
+                <div id='R2-Box' class="pickbox">  
+                    <div id='R2-additional' class='championadditional'></div>
+ 
                     <div id='R2-champstats-div' class='championstatsdiv'>
                         <span class="red_champion_name" text-align="left" id="R2_champion_name"></span>
                         <span class="red_champion_type" text-align="left" id="R2_champion_type"></span> 
@@ -242,11 +255,12 @@
                     <div id='R2-image-div' class='championimagediv'>                     
                         <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R2Icon" onclick="getChampionOverlay('R2')">
                     </div>
-                    <!-- <svg id="B2Color" class="colorpiechart"></svg> -->
                 </div>
                 <br>
 
                 <div id='R3-Box' class="pickbox"> 
+                    <div id='R3-additional' class='championadditional'></div>
+
                     <div id='R3-champstats-div' class='championstatsdiv'>
                         <span class="red_champion_name" text-align="left" id="R3_champion_name"></span>
                         <span class="red_champion_type" text-align="left" id="R3_champion_type"></span>
@@ -256,11 +270,12 @@
                     <div id='R3-image-div' class='championimagediv'>                     
                         <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R3Icon" onclick="getChampionOverlay('R3')">
                     </div>
-                    <!-- <svg id="B3Color" class="colorpiechart"></svg> -->
                 </div>
                 <br>
 
                 <div id='R4-Box' class="pickbox"> 
+                    <div id='R4-additional' class='championadditional'></div>
+
                     <div id='R4-champstats-div' class='championstatsdiv'>
                         <span class="red_champion_name" text-align="left" id="R4_champion_name"></span>
                         <span class="red_champion_type" text-align="left" id="R4_champion_type"></span>
@@ -270,11 +285,12 @@
                     <div id='R4-image-div' class='championimagediv'>                     
                         <input type="image" src="images/question_mark.jpeg" class="red_championimage" align="right" id="R4Icon" onclick="getChampionOverlay('R4')">
                     </div>
-                    <!-- <svg id="B4Color" class="colorpiechart"></svg> -->
                 </div>
                 <br>
 
                 <div id='R5-Box' class="pickbox"> 
+                    <div id='R5-additional' class='championadditional'></div>
+
                     <div id='R5-champstats-div' class='championstatsdiv'>
                         <span class="red_champion_name" text-align="left" id="R5_champion_name"></span>
                         <span class="red_champion_type" text-align="left" id="R5_champion_type"></span>
